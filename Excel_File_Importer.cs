@@ -1,11 +1,6 @@
 ﻿using common;
 using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Excel_Importer
 {
@@ -43,10 +38,18 @@ namespace Excel_Importer
                 string sql = tab.initialize(name, ws, verbose);
                 mydatabase.ExecuteNonQuery(sql);
                 List<Dictionary<String, String>> v = tab.import();
+                int row = 2;
+                mydatabase.ExecuteNonQuery("BEGIN TRANSACTION");
                 foreach (Dictionary<String, String> i in v)
                 {
                     mydatabase.Insert(name, i);
+                    if(verbose)
+                    {
+                        Console.WriteLine(string.Format("imported up to row: {0}", row));
+                    }
+                    row += 1;
                 }
+                mydatabase.ExecuteNonQuery("COMMIT TRANSACTION");
             }
         }
     }

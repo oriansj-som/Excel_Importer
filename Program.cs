@@ -42,7 +42,7 @@ namespace Excel_Importer
                                      +"to identify what excel file to load use --input-file filename");
                     Environment.Exit(0);
                 }
-                else if (Match.CaseInsensitive("--verbose", args[i]))
+                else if (Match.CaseInsensitive("--verbose", args[i]) || Match.CaseInsensitive("-v", args[i]))
                 {
                     int index = 0;
                     verbose = true;

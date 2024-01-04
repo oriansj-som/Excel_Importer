@@ -98,6 +98,11 @@ namespace Excel_Importer
                     }
                     col += 1;
                 }
+                if (verbose) 
+                {
+                    Console.WriteLine(String.Format("read up to line {0}", row));
+                }
+
                 row += 1;
                 values.Add(value);
             }

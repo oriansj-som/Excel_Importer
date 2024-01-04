@@ -2,7 +2,7 @@
   "profiles": {
     "Excel_Importer": {
       "commandName": "Project",
-      "commandLineArgs": "-d data.db -i foo.xlsx"
+      "commandLineArgs": "-d data.db -i foo.xlsx -v"
     }
   }
 }

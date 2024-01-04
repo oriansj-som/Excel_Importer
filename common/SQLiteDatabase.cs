@@ -10,10 +10,21 @@ namespace common
 
         public SQLiteDatabase(String inputFile)
         {
-            dbConnection = String.Format("Data Source={0}", inputFile);
-            cnn = new SQLiteConnection(dbConnection);
-            // Make things a bit faster
-            cnn.Open();
+            if (File.Exists(inputFile))
+            {
+                dbConnection = String.Format("Data Source={0}", inputFile);
+                cnn = new SQLiteConnection(dbConnection);
+                // Make things a bit faster
+                cnn.Open();
+            }
+            else
+            {
+                SQLiteConnection.CreateFile(inputFile);
+                dbConnection = String.Format("Data Source={0}", inputFile);
+                cnn = new SQLiteConnection(dbConnection);
+                // Make things a bit faster
+                cnn.Open();
+            }
         }
 
         public void SQLiteDatabase_Close()
